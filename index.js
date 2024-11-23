@@ -12,6 +12,7 @@ const userRouter = require('./routes/users');
 //so that express will return json data;
 app.use(express.json);
 app.use(cors());
+app.use('/api/users', userRoutes);
 
 //Routes
 app.get("/",(req,res)=>{

@@ -57,7 +57,46 @@ async function createUser({ name, email, password, dob, marketingPreferences }) 
 
 }
 
+async function updateUser(id,{name,email,password,dob,marketingPreferences})
+{
+    if(!id || !email || !password || typeof id!=="number" || typeof email !=="string" || typeof password!=="string")
+    {
+        throw new Error("Invalid user data")
+    }
+
+    const connection = await pool.getConnection();
+    try{
+        await connection.beginTransaction();
+        await connection.query(
+            `UPDATE users SET name = ?, email = ?, password = ?,dob =?, WHERE id=? `,[name,email,password,dob,id]
+        )
+
+        await connection.query(`DELETE FROM user_marketing_preference WHERE user_id=?`,[id]);
+        if(Array.isArray(marketingPreferences))
+        {
+            for(const item of marketingPreferences)
+            {
+                await connection.query(
+                    `INSERT INTO user_marketing_preference (user_id,preference) VALUES (?,?)`,[id,item]
+                );
+
+            }
+        }
+        await connection.commit();
+    }
+    catch(error)
+    {
+        await connection.rollback();
+        throw error;
+    }
+    finally{
+        connection.release();
+    }
+
+}
+
 module.exports = {
     getUserByEmail,
-    createUser
+    createUser,
+    updateUser
 }
