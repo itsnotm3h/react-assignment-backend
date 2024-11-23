@@ -23,9 +23,9 @@ CREATE TABLE marketing_preferences(
 
 CREATE TABLE user_marketing_preferences(
     id INT AUTO_INCREMENT PRIMARY KEY,
-    users_id INT NOT NULL,
+    user_id INT NOT NULL,
     preference_id INT NOT NULL,
-    FOREIGN KEY(users_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY(preference_id) REFERENCES marketing_preferences(id) ON DELETE CASCADE
 );
 

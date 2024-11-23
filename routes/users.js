@@ -8,7 +8,7 @@ router.post('/register', async(req,res)=>{
         const {name, email, password,dob,marketingPreferences} = req.body;
 
         const userId = await userService.registerUser({
-            name,email,password,dob,marketingPreference
+            name,email,password,dob,marketingPreferences
         })
 
         // in the service layer, it was coded to return userID upon adding data into database. 

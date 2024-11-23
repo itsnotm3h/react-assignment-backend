@@ -7,12 +7,12 @@ require('dotenv').config();
 const pool = require("./database");
 const userRouter = require('./routes/users');
 
-
+const app = express();
 //Middleware
 //so that express will return json data;
-app.use(express.json);
+app.use(express.json());
 app.use(cors());
-app.use('/api/users', userRoutes);
+app.use('/api/users', userRouter);
 
 //Routes
 app.get("/",(req,res)=>{
