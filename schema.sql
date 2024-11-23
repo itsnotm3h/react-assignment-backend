@@ -18,7 +18,6 @@ CREATE TABLE users(
     password VARCHAR(255) NOT NULL,
     dob DATE NOT NULL,
     created_at DATETIME DEFAULT NOW()
-
 );
 
 CREATE TABLE marketing_preferences(
