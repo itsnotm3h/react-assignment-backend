@@ -2,17 +2,19 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
-
-// const productRouter = require('./routes/products');
-const pool = require("./database");
+const productsRouter = require('./routes/products');
 const userRouter = require('./routes/users');
+const cartRouter = require('./routes/cart');
 
 const app = express();
 //Middleware
 //so that express will return json data;
 app.use(express.json());
 app.use(cors());
+app.use('/api/products', productsRouter);
 app.use('/api/users', userRouter);
+app.use('/api/cart', cartRouter);
+
 
 //Routes
 app.get("/",(req,res)=>{
