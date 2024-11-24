@@ -5,7 +5,8 @@ CREATE TABLE products (
     name VARCHAR(255) NOT NULL,
     price DECIMAL(10,2) NOT NULL,
     image VARCHAR(255) NOT NULL,
-    description TEXT NOT NULL
+    description TEXT NOT NULL,
+    series VARCHAR(255) NOT NULL
 );
 CREATE TABLE users(
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -56,3 +57,6 @@ quantity INT NOT NULL DEFAULT 1,
 FOREIGN KEY(order_id) REFERENCES orders(id),
 FOREIGN KEY(product_id) REFERENCES products(id)
 );
+
+
+

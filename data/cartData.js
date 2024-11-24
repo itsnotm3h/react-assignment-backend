@@ -3,7 +3,7 @@ const pool = require('../database');
 async function getCartData(userId){
     // we need to join the table. 
     // using as it will return an array. 
-    const [rows] = await pool.query(`SELECT cart.id, cart.product_id, product.image as imageUrl, product.name AS productName, CAST(price AS DOUBLE) AS price, cart.quantity FROM cart_items cart JOIN products product ON cart.product_id = product.id WHERE cart.user_id = ?`,[userId]);
+    const [rows] = await pool.query(`SELECT cart.id, cart.product_id, product.imageURL, product.name AS productName, CAST(price AS DOUBLE) AS price, cart.quantity FROM cart_items cart JOIN ceramics product ON cart.product_id = product.id WHERE cart.user_id = ?`,[userId]);
 
     return rows;
 }
