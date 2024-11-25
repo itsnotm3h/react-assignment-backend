@@ -3,24 +3,41 @@ const router = express.Router();
 const productService = require('../services/productService');
 
 //Get all products. 
-router.get("/", async (req,res)=>{
-    try{
-        const products = await productService.getAllProducts();
-        res.json(products);
-    }
-    catch(error)
-    {
+// router.get("/", async (req,res)=>{
+//     try{
+//         const products = await productService.getAllProducts();
+//         res.json(products);
+//     }
+//     catch(error)
+//     {
         
-        res.status(500).json({message:error.message});
+//         res.status(500).json({message:error.message});
 
-    }
-});
+//     }
+// });
 
-router.get('/:id', async (req,res)=>{
-    const id = req.params.id;
+router.get('/', async (req,res)=>{
+// need to reback on what we have previously learned.
+    const { id, series } = req.query;
+
     try{
-        const product =  await productService.getProduct(req.params.id);
-        res.json(product);
+
+        if(id)
+        {
+            const product =  await productService.getProduct(id);
+            res.json(product);
+        }
+        else if(series)
+        {
+
+            const product =  await productService.getSeries(series);
+            res.json(product);
+        }
+        else{
+            const products = await productService.getAllProducts();
+            res.json(products);
+        }
+       
     }
     catch(error)
     {
@@ -28,6 +45,5 @@ router.get('/:id', async (req,res)=>{
     }
 
 });
-
 
 module.exports = router;

@@ -3,6 +3,7 @@ const router = express.Router();
 const userService = require('../services/userService');
 const jwt = require('jsonwebtoken');
 
+
 router.post('/register', async(req,res)=>{
     try{
         const {name, email, password,dob,marketingPreferences} = req.body;

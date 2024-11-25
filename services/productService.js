@@ -18,7 +18,19 @@ async function getProduct(id)
     return product;
 }
 
+async function getSeries(series){
+
+    const product = await productData.getProductSeriesData(series);
+    
+    if(!product)
+        {
+            throw new Error("No product found");
+        }
+    return product;
+}
+
 module.exports = {
     getAllProducts,
-    getProduct
+    getProduct,
+    getSeries
 };

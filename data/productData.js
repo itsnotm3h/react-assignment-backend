@@ -11,7 +11,14 @@ async function getProductDataById(id)
     return rows[0];
 }
 
+async function getProductSeriesData(x)
+{
+    const [rows]= await pool.query(`SELECT * FROM ceramics WHERE series=?`,[x]);
+    return rows;
+}
+
 module.exports = {
     getAllProductsData,
-    getProductDataById
+    getProductDataById,
+    getProductSeriesData
 }; 
