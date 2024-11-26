@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const userService = require('../services/userService');
 const jwt = require('jsonwebtoken');
+const { route } = require("./products");
+const authenticateUser = require('../middlewares/UserAuth');
+
 
 
 router.post('/register', async(req,res)=>{
@@ -36,6 +39,16 @@ router.post("/login", async (req,res)=>{
     }
 
 
+})
+
+router.post("/logout",authenticateUser, async (req,res)=>{
+    try{
+        res.json("logout" + req.user.userId);
+    }
+    catch(error)
+    {
+        res.status(401).json({message:error.message});
+    }
 })
 
 module.exports = router;
