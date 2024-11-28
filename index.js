@@ -7,6 +7,7 @@ const userRouter = require('./routes/users');
 const cartRouter = require('./routes/cart');
 
 const app = express();
+
 //Middleware
 //so that express will return json data;
 app.use(express.json());

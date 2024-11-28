@@ -30,8 +30,12 @@ router.post("/login", async (req,res)=>{
         const {email,password} = req.body;
         const user = await userService.loginUser(email,password);
         const token = jwt.sign({userId:user.id},process.env.JWT_SECRET,{expiresIn:'1h'});
+        // const name = user.name;
 
-        res.json({ message: "Login successful", token });
+    
+        res.json({ message: "Login successful", token});
+
+        // console.log("This is from route layer:" + user.name)
 
     }
     catch(error){
